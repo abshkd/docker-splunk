@@ -59,9 +59,10 @@ EXPOSE 4001 8000 8065 8088 8089 8191 9887 9997
 
 # Create the dirs before VOLUME tags so we can control permissions
 # on those folders
-RUN sudo mkdir $SPLUNK_HOME/etc \
-    && sudo mkdir $SPLUNK_HOME/var \
-    && sudo chown -R ${SPLUNK_USER}:${SPLUNK_GROUP} $SPLUNK_HOME
+USER root
+RUN mkdir $SPLUNK_HOME/etc \
+    && mkdir $SPLUNK_HOME/var \
+    && chown -R ${SPLUNK_USER}:${SPLUNK_GROUP} $SPLUNK_HOME
 
 VOLUME [ "/opt/splunk/etc", "/opt/splunk/var" ]
 
